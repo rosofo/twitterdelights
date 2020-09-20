@@ -16,26 +16,28 @@ const Media = ({ tweet }) => {
 
 const MediaList = ({ tweets }) => {
   return <div>
-    {tweets.map(t => <Media tweet={t} key={t.id} />)}
+    {tweets.map(t => <div key={t.id} className="mb-2">
+      <Media tweet={t} key={t.id} />
+    </div>)}
   </div>
 }
 
 export default function Home() {
   const [tweets, setTweets] = useState([])
-  console.log('asdsdsa')
-  console.log("data", tweets)
+
   useEffect(() => {
     (async () => {
       const { data: { data } } = await Axios.get('/api/getTweets')
-      console.log("data", data)
       setTweets(data)
     })()
   }, [])
+
   return (
     <div className={styles.container}>
       <Head>
         <title>Twitter Delights</title>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.10/tailwind.min.css" />
       </Head>
 
       <main className={styles.main}>
@@ -48,8 +50,8 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
+          Made with ♥️ by &nbsp;
+          <a href="http://walidvb.com" target="_blank">walidvb</a>
         </a>
       </footer>
     </div>

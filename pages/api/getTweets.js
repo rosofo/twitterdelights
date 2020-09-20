@@ -25,7 +25,9 @@ export default async (req, res) => {
   try{
     const bearerToken = await getBearerToken()
     const params = {
-      'query': 'from:sk33mask'
+      'query': 'from:sk33mask url:youtube',
+      max_results: 10,
+      'tweet.fields': 'entities'
     }
     const { data } = await Axios.get(endpointUrl, { 
       params,

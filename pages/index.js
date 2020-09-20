@@ -3,24 +3,33 @@ import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import styles from '../styles/Home.module.css'
 
-export default function Home() {
-  const [tweets, setTweets] = useState({})
 
+const MediaList = ({ tweets }) => {
+  return <div>
+    {tweets.map(t => t.entities.urls[0].expanded_url)}
+  </div>
+}
+
+export default function Home() {
+  const [tweets, setTweets] = useState([])
+  console.log('asdsdsa')
+  console.log("data", tweets)
   useEffect(() => {
     (async () => {
-      const { data } = await Axios.get('/api/getTweets')
+      const { data: { data } } = await Axios.get('/api/getTweets')
+      console.log("data", data)
       setTweets(data)
     })()
   }, [])
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>Twitter Delights</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>
-        { JSON.stringify(tweets) }
+        <MediaList tweets={tweets} />
       </main>
 
       <footer className={styles.footer}>

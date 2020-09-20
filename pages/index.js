@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import ReactPlayer from 'react-player'
 import styles from '../styles/Home.module.css'
+import useDebounce from '../src/useDebounce.js'
 
 const Media = ({ tweet }) => {
   const url = tweet.entities.urls[0].expanded_url
@@ -22,15 +23,42 @@ const MediaList = ({ tweets }) => {
   </div>
 }
 
+const SearchInput = ({ username, setUsername }) => {
+  return <input className="border-b border-gray-400 text-center py-1 px-2" placeholder="Enter a twitter handle" type={'text'} value={username} onChange={({ target: { value } }) => setUsername(value)}/>
+}
+
+const Results = ({ tweets: { meta, data } }) => {
+  if(!meta.result_count){
+    return <div>
+      No Results...
+    </div>
+  }
+  return <MediaList tweets={data} />
+}
+
+const NoQuery = () => {
+  return null
+}
+const initialTweetsState = {
+  data: [],
+  meta: { }
+}
+
 export default function Home() {
-  const [tweets, setTweets] = useState([])
+  const [tweets, setTweets] = useState(initialTweetsState)
+  const [username, setUsername] = useState('sk33mask')
+  const debouncedUsername = useDebounce(username, 500)
 
   useEffect(() => {
+    if(username.length === 0){
+      setTweets(initialTweetsState)
+      return
+    }
     (async () => {
-      const { data: { data } } = await Axios.get('/api/getTweets')
+      const { data } = await Axios.get(`/api/getTweets?username=${debouncedUsername}`)
       setTweets(data)
     })()
-  }, [])
+  }, [debouncedUsername])
 
   return (
     <div className={styles.container}>
@@ -41,18 +69,19 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <MediaList tweets={tweets} />
+        <div className="my-16 mt-32">
+          <SearchInput username={username} setUsername={setUsername} />
+        </div>
+        { username.length ? <Results tweets={tweets} /> : <NoQuery /> }
       </main>
 
       <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Made with ♥️ by &nbsp;
-          <a href="http://walidvb.com" target="_blank">walidvb</a>
-        </a>
+          <div className="text-underline">
+            Twitter Delights
+          </div>
+          <div>
+            Made with ♥️ by&nbsp; <a href="http://walidvb.com" target="_blank">walidvb</a>
+          </div>
       </footer>
     </div>
   )

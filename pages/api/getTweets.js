@@ -16,16 +16,16 @@ const getBearerToken = async () => {
       password: API_SECRET_KEY,
     }
   })
-
-  console.log("access_token", access_token)
   return access_token
 }
 
 export default async (req, res) => {
+  const username = req.query.username
   try{
     const bearerToken = await getBearerToken()
+    // currently only fetch youtube links
     const params = {
-      'query': 'from:sk33mask url:youtube',
+      'query': `from:${username} url:youtube`,
       max_results: 10,
       'tweet.fields': 'entities'
     }

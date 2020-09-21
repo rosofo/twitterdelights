@@ -114,7 +114,7 @@ export default function Home() {
 
       <footer className={styles.footer}>
           <div className="text-gray-600 text-sm">
-            Made with ♥️ by&nbsp;<a className="underline hover:no-underline" href="http://walidvb.com" target="_blank">walidvb</a>, author of <a className="underline hover:no-underline" href="https://www.diggersdelights.net" target="_blank">diggersdelights</a>
+            Made with ♥️ by&nbsp;<a className="underline hover:no-underline" href="http://walidvb.com" target="_blank">walidvb</a>, creator of wip <a className="underline hover:no-underline" href="https://www.diggersdelights.net/curated" target="_blank">diggersdelights</a>(focus is now on <a href="https://reveel.id" className="underline hover:no-underline" target="_blank">reveel.id</a> 🚀)
           </div>
       </footer>
     </div>

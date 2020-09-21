@@ -56,10 +56,10 @@ const WelcomeCTA = ({ setUsername }) => {
     </div>
     Your final stop to check out to all these
     <br />
-    great-looking tracks posted by that guy on twitter
+    great-looking tracks posted by that person on twitter
     <br />
     <div className="text-gray-700 mt-2">
-      Here, a couple you can try out:
+      Need inspiration? Try one of these fine ones:
       <br/> 
         <span className="underline hover:no-underline cursor-pointer" onClick={() => setUsername('sk33mask')}>skeemask</span>, <span className="underline hover:no-underline cursor-pointer" onClick={() => setUsername('BAKEGLA')}>bake</span> or <span className="underline hover:no-underline cursor-pointer" onClick={() => setUsername('delightsdiggers')}>delightsdiggers</span>
     </div>
@@ -101,7 +101,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <div className={`my-16 mt-32 ${styles.appear}`}>
+        <div className={`mb-16 mt-8 ${styles.appear} sticky top-0 w-full z-10 flex justify-center bg-white pb-2`}>
           <SearchInput username={username} setUsername={setUsername} />
         </div>
         {

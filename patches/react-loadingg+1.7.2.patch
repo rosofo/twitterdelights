@@ -1,0 +1,13 @@
+diff --git a/node_modules/react-loadingg/lib/utils/style.js b/node_modules/react-loadingg/lib/utils/style.js
+index aef4826..4a4a70c 100644
+--- a/node_modules/react-loadingg/lib/utils/style.js
++++ b/node_modules/react-loadingg/lib/utils/style.js
+@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
+ exports.borderRadiusContainerSize = exports.sizeContainer = exports.sizeItem = exports.commonStyle = void 0;
+ var commonStyle = {
+   margin: 'auto',
+-  position: 'absolute',
++  // position: 'absolute',
+   left: 0,
+   right: 0,
+   top: 0,

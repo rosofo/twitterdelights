@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import styles from '../styles/Home.module.css'
 import useDebounce from '../src/useDebounce.js'
 import Media from '../src/components/Media'
+import { BoxLoading } from 'react-loadingg'
 
 const MediaList = ({ tweets }) => {
   return <div>
@@ -34,7 +35,7 @@ const Results = ({ username, tweets: { meta, data } }) => {
 
 const NoQuery = ({ setUsername }) => {
   return <div>
-    You can try <span className="underline hover:no-underline cursor-pointer" onClick={() => setUsername('sk33mask')}>sk33mask</span> or <span className="underline hover:no-underline cursor-pointer" onClick={() => setUsername('delightsdiggers')}>delightsdiggers</span>
+    Examples: <span className="underline hover:no-underline cursor-pointer" onClick={() => setUsername('sk33mask')}>sk33mask</span> or <span className="underline hover:no-underline cursor-pointer" onClick={() => setUsername('delightsdiggers')}>delightsdiggers</span>
   </div>
 }
 const initialTweetsState = {
@@ -43,6 +44,7 @@ const initialTweetsState = {
 }
 
 export default function Home() {
+  const [loading, setLoading] = useState(false)
   const [tweets, setTweets] = useState(initialTweetsState)
   const [username, setUsername] = useState('')
   const debouncedUsername = useDebounce(username, 500)
@@ -53,8 +55,10 @@ export default function Home() {
       return
     }
     (async () => {
+      setLoading(true)
       const { data } = await Axios.get(`/api/getTweets?username=${debouncedUsername}`)
       setTweets(data)
+      setLoading(false)
     })()
   }, [debouncedUsername])
 
@@ -70,11 +74,16 @@ export default function Home() {
         <div className="my-16 mt-32">
           <SearchInput username={username} setUsername={setUsername} />
         </div>
-        {username.length ? <Results username={username} tweets={tweets} /> : <NoQuery setUsername={setUsername} /> }
+        {
+          loading ? <div><BoxLoading color="#ABC" /></div>
+          : username.length ? 
+            <Results username={username} tweets={tweets} /> 
+            : <NoQuery setUsername={setUsername} /> 
+        }
       </main>
 
       <footer className={styles.footer}>
-          <div className="text-underline">
+          <div className="underline">
             Twitter Delights
           </div>
           <div>

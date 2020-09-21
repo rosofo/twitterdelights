@@ -41,7 +41,8 @@ const Results = ({ username, tweets: { meta, data } }) => {
     <a 
       href={`https://twitter.com/${username}`}
       className=" mb-4 block text-sm text-gray-700"
-    >Let me see {username} on twitter</a>
+      target="_blank"
+    >See the complete feed on twitter</a>
     <MediaProvider>
       <MediaList tweets={data} />
     </MediaProvider>
@@ -53,16 +54,14 @@ const WelcomeCTA = ({ setUsername }) => {
     <div className="font-bold mb-2 text-2xl">
       Twitter Delights
     </div>
-    The final stop to listen to all these
+    Your final stop to check out to all these
     <br />
     great-looking tracks posted by that guy on twitter
     <br />
     <div className="text-gray-700 mt-2">
-      Have a look: 
-        &nbsp;<span className="underline hover:no-underline cursor-pointer" onClick={() => setUsername('sk33mask')}>skeemask</span>,
-        &nbsp;<span className="underline hover:no-underline cursor-pointer" onClick={() => setUsername('BAKEGLA')}>bake</span>
-        &nbsp;or&nbsp;
-        <span className="underline hover:no-underline cursor-pointer" onClick={() => setUsername('delightsdiggers')}>delightsdiggers</span>
+      Here, a couple you can try out:
+      <br/> 
+        <span className="underline hover:no-underline cursor-pointer" onClick={() => setUsername('sk33mask')}>skeemask</span>, <span className="underline hover:no-underline cursor-pointer" onClick={() => setUsername('BAKEGLA')}>bake</span> or <span className="underline hover:no-underline cursor-pointer" onClick={() => setUsername('delightsdiggers')}>delightsdiggers</span>
     </div>
   </div>
 }

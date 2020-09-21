@@ -17,17 +17,25 @@ const SearchInput = ({ username, setUsername }) => {
   return <input className="border-b border-gray-400 text-center py-1 px-2" placeholder="Enter a twitter handle" type={'text'} value={username} onChange={({ target: { value } }) => setUsername(value)}/>
 }
 
-const Results = ({ tweets: { meta, data } }) => {
+const Results = ({ username, tweets: { meta, data } }) => {
   if(!meta.result_count){
     return <div>
       No Results...
     </div>
   }
-  return <MediaList tweets={data} />
+  return <div>
+    <a 
+      href={`https://twitter.com/${username}`}
+      className=" mb-4 block text-sm text-gray-700"
+    >See on twitter</a>
+    <MediaList tweets={data} />
+  </div>
 }
 
-const NoQuery = () => {
-  return null
+const NoQuery = ({ setUsername }) => {
+  return <div>
+    You can try <span className="underline hover:no-underline cursor-pointer" onClick={() => setUsername('sk33mask')}>sk33mask</span> or <span className="underline hover:no-underline cursor-pointer" onClick={() => setUsername('delightsdiggers')}>delightsdiggers</span>
+  </div>
 }
 const initialTweetsState = {
   data: [],
@@ -36,7 +44,7 @@ const initialTweetsState = {
 
 export default function Home() {
   const [tweets, setTweets] = useState(initialTweetsState)
-  const [username, setUsername] = useState('sk33mask')
+  const [username, setUsername] = useState('')
   const debouncedUsername = useDebounce(username, 500)
 
   useEffect(() => {
@@ -62,7 +70,7 @@ export default function Home() {
         <div className="my-16 mt-32">
           <SearchInput username={username} setUsername={setUsername} />
         </div>
-        { username.length ? <Results tweets={tweets} /> : <NoQuery /> }
+        {username.length ? <Results username={username} tweets={tweets} /> : <NoQuery setUsername={setUsername} /> }
       </main>
 
       <footer className={styles.footer}>

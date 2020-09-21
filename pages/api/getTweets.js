@@ -1,9 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import Axios from 'axios';
 
-const API_KEY = 'SaGXxXsATwJ94PJT0KVYjgb3f'
-const API_SECRET_KEY = 'hn4nLjPplFOebdPEzZC6iM0G66qJX1UHbGIs1m1mrXA0dwIBc5'
-
 const endpointUrl = 'https://api.twitter.com/2/tweets/search/recent'
 
 const getBearerToken = async () => {
@@ -12,8 +9,8 @@ const getBearerToken = async () => {
     grant_type: 'client_credentials'
   }, {
     auth: {
-      username: API_KEY,
-      password: API_SECRET_KEY,
+      username: process.env.TWITTER_API_KEY,
+      password: process.env.TWITTER_API_SECRET_KEY,
     }
   })
   return access_token

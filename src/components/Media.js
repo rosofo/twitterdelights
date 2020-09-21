@@ -1,8 +1,14 @@
 import { useState, useEffect } from 'react';
 import ReactPlayer from 'react-player';
+import { useMediaContext } from '../hooks/useMediaContext';
 
 const Media = ({ tweet }) => {
   const [displayIframe, setDisplayIframe] = useState()
+  const [playing, setPlaying] = useState()
+  const { nowPlaying, setNowPlaying } = useMediaContext()
+  useEffect(() => {
+    setPlaying(nowPlaying === url)
+  }, [nowPlaying, url, setPlaying])
 
   const { entities } = tweet
   if(!entities || !entities.urls){
@@ -22,8 +28,11 @@ const Media = ({ tweet }) => {
   }
   return <div>
     <ReactPlayer 
-      url={url} 
+      url={url}
+      onPlay={() => setNowPlaying(url)}
+      onPause={() => setNowPlaying(url)}
       controls
+      playing={playing}
     />
   </div>
 };

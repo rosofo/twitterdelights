@@ -5,6 +5,8 @@ import styles from '../styles/Home.module.css'
 import useDebounce from '../src/useDebounce.js'
 import Media from '../src/components/Media'
 import { BoxLoading } from 'react-loadingg'
+import { MediaProvider } from '../src/hooks/useMediaContext'
+import TwitterIcon from '../src/components/TwitterIcon'
 
 const MediaList = ({ tweets }) => {
   return <div>
@@ -15,7 +17,18 @@ const MediaList = ({ tweets }) => {
 }
 
 const SearchInput = ({ username, setUsername }) => {
-  return <input autofocus="true"  className="focus:outline-none focus:border-gray-700 border-b border-gray-400 text-center py-1 px-2" placeholder="Type a twitter handle" type={'text'} value={username} onChange={({ target: { value } }) => setUsername(value)}/>
+  return <div className="flex items-center" >
+    { username.length ? <a 
+      href={`https://twitter.com/${username}`} 
+      target="_blank"
+      className="opacity-75 hover:opacity-100"
+    >
+      <TwitterIcon />
+    </a>
+      : <span className="opacity-50"><TwitterIcon /></span>
+  }
+    <input autofocus="true" className="focus:outline-none focus:border-gray-700 border-b border-gray-400  py-1 ml-4 pr-2" placeholder="Type a twitter handle" type={'text'} value={username} onChange={({ target: { value } }) => setUsername(value)}/>
+  </div>
 }
 
 const Results = ({ username, tweets: { meta, data } }) => {
@@ -28,21 +41,25 @@ const Results = ({ username, tweets: { meta, data } }) => {
     <a 
       href={`https://twitter.com/${username}`}
       className=" mb-4 block text-sm text-gray-700"
-    >See on twitter</a>
-    <MediaList tweets={data} />
+    >Let me see {username} on twitter</a>
+    <MediaProvider>
+      <MediaList tweets={data} />
+    </MediaProvider>
   </div>
 }
 
 const NoQuery = ({ setUsername }) => {
-  return <div className="text-center">
+  return <div className={`${styles.intro} text-center`}>
     <div className="font-bold mb-2 text-2xl">
       Twitter Delights
     </div>
-    See all youtube videos posted by twitter users
+    The final stop to listen to all these
     <br />
-    <span className="text-gray-700">
-      Examples: <span className="underline hover:no-underline cursor-pointer" onClick={() => setUsername('sk33mask')}>sk33mask</span> or <span className="underline hover:no-underline cursor-pointer" onClick={() => setUsername('delightsdiggers')}>delightsdiggers</span>
-    </span>
+    great-looking tracks posted by that guy on twitter
+    <br />
+    <div className="text-gray-700 mt-2">
+      Have a look: <span className="underline hover:no-underline cursor-pointer" onClick={() => setUsername('sk33mask')}>sk33mask</span> or <span className="underline hover:no-underline cursor-pointer" onClick={() => setUsername('delightsdiggers')}>delightsdiggers</span>
+    </div>
   </div>
 }
 const initialTweetsState = {

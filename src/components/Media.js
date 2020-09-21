@@ -4,7 +4,11 @@ import ReactPlayer from 'react-player';
 const Media = ({ tweet }) => {
   const [displayIframe, setDisplayIframe] = useState()
 
-  const url = tweet.entities.urls[0].expanded_url;
+  const { entities } = tweet
+  if(!entities || !entities.urls){
+    return url
+  }
+  const url = entities.urls[0].expanded_url;
 
   if (!ReactPlayer.canPlay(url)) {
     return null;
@@ -17,8 +21,10 @@ const Media = ({ tweet }) => {
     </div>
   }
   return <div>
-    <ReactPlayer url={url} />
-    {url}
+    <ReactPlayer 
+      url={url} 
+      controls
+    />
   </div>
 };
 

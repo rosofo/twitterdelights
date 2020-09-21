@@ -26,7 +26,7 @@ export default async (req, res) => {
     // currently only fetch youtube links
     const params = {
       'query': `from:${username} url:youtube`,
-      max_results: 10,
+      max_results: 100,
       'tweet.fields': 'entities'
     }
     const { data } = await Axios.get(endpointUrl, { 

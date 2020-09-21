@@ -49,7 +49,15 @@ const Results = ({ username, tweets: { meta, data } }) => {
   </div>
 }
 
+const exampleAccounts = [
+  // 'keinobjekt',
+  'sk33mask',
+  'BAKEGLA',
+  'delightsdiggers'
+]
+
 const WelcomeCTA = ({ setUsername }) => {
+
   return <div className={`${styles.intro} text-center`}>
     <div className="font-bold mb-2 text-2xl">
       Twitter Delights
@@ -61,7 +69,10 @@ const WelcomeCTA = ({ setUsername }) => {
     <div className="text-gray-700 mt-2">
       Need inspiration? Try one of these fine ones:
       <br/> 
-        <span className="underline hover:no-underline cursor-pointer" onClick={() => setUsername('sk33mask')}>skeemask</span>, <span className="underline hover:no-underline cursor-pointer" onClick={() => setUsername('BAKEGLA')}>bake</span> or <span className="underline hover:no-underline cursor-pointer" onClick={() => setUsername('delightsdiggers')}>delightsdiggers</span>
+      {exampleAccounts
+        .map(account => <span key={account} className="underline hover:no-underline cursor-pointer" onClick={() => setUsername(account)}>{account}</span>)
+        .reduce((prev, curr, i) => [prev, i !== exampleAccounts.length - 1 ? ', ' : ' or ', curr])
+      }
     </div>
   </div>
 }

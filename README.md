@@ -1,13 +1,22 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+
+## Setup
+
+You'll want your own Twitter API Keys for development, which you can request on [their website](https://developer.twitter.com/en/portal/dashboard).
+They should be declared in an `.env` file at the root of this project, as such:
+
+```
+TWITTER_API_KEY=thetwitterapikey
+TWITTER_API_SECRET_KEY=thetwitterapisecretkey
+```
+
 ## Getting Started
 
 First, run the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
+vercel dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.

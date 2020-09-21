@@ -28,28 +28,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
-
-.footer img {
-  margin-left: 0.5rem;
-}
-
-
-.title a:hover,
-.title a:focus,
-.title a:active {
-  text-decoration: underline;
-}
-
-.title {
-  margin: 0;
-  line-height: 1.15;
-  font-size: 4rem;
-}
-
-.title,
-.description {
-  text-align: center;
+  filter: grayscale();
 }
 
 .description {

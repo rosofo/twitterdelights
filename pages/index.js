@@ -10,7 +10,7 @@ import TwitterIcon from '../src/components/TwitterIcon'
 
 const MediaList = ({ tweets }) => {
   return <div>
-    {tweets.map(t => <div key={t.id} className="mb-2">
+    {tweets.reverse().map(t => <div key={t.id} className="mb-2">
       <Media tweet={t} key={t.id} />
     </div>)}
   </div>
@@ -113,8 +113,8 @@ export default function Home() {
       </main>
 
       <footer className={styles.footer}>
-          <div className="text-gray-600 text-sm">
-            Made with ♥️ by&nbsp;<a className="underline hover:no-underline" href="http://walidvb.com" target="_blank">walidvb</a>, creator of wip <a className="underline hover:no-underline" href="https://www.diggersdelights.net/curated" target="_blank">diggersdelights</a>(focus is now on <a href="https://reveel.id" className="underline hover:no-underline" target="_blank">reveel.id</a> 🚀)
+          <div className="text-gray-600 text-xs">
+            Made with ♥️ by&nbsp;<a className="underline hover:no-underline" href="http://walidvb.com" target="_blank">walidvb</a>, creator of (wip) <a className="underline hover:no-underline" href="http://www.diggersdelights.net/curated" target="_blank">diggersdelights</a> and (co-) of <a href="https://reveel.id" className="underline hover:no-underline" target="_blank">reveel.id</a> 🚀
           </div>
       </footer>
     </div>

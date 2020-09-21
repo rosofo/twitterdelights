@@ -125,7 +125,7 @@ export default function Home() {
 
       <footer className={styles.footer}>
           <div className="text-gray-600 text-xs">
-            Made with ♥️ by&nbsp;<a className="underline hover:no-underline" href="http://walidvb.com" target="_blank">walidvb</a>, creator of (wip) <a className="underline hover:no-underline" href="http://www.diggersdelights.net/curated" target="_blank">diggersdelights</a>🎶 and (co-) of <a href="https://reveel.id" className="underline hover:no-underline" target="_blank">reveel.id</a> 🚀
+            Made with ♥️ by&nbsp;<a className="underline hover:no-underline" href="http://walidvb.com" target="_blank">walidvb</a>, creator of (wip) <a className="underline hover:no-underline" href="http://www.diggersdelights.net/curated" target="_blank">diggersdelights</a>🎶 and (co-) of <a href="https://reveel.id" className="underline hover:no-underline" target="_blank">reveel.id</a> 🚀 (<a href="https://github.com/walidvb/twitterdelights" target="_blank" className="underline hover:no-underline">source code</a>)
           </div>
       </footer>
     </div>

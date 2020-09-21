@@ -48,7 +48,7 @@ const Results = ({ username, tweets: { meta, data } }) => {
   </div>
 }
 
-const NoQuery = ({ setUsername }) => {
+const WelcomeCTA = ({ setUsername }) => {
   return <div className={`${styles.intro} text-center`}>
     <div className="font-bold mb-2 text-2xl">
       Twitter Delights
@@ -58,7 +58,11 @@ const NoQuery = ({ setUsername }) => {
     great-looking tracks posted by that guy on twitter
     <br />
     <div className="text-gray-700 mt-2">
-      Have a look: <span className="underline hover:no-underline cursor-pointer" onClick={() => setUsername('sk33mask')}>sk33mask</span> or <span className="underline hover:no-underline cursor-pointer" onClick={() => setUsername('delightsdiggers')}>delightsdiggers</span>
+      Have a look: 
+        <span className="underline hover:no-underline cursor-pointer" onClick={() => setUsername('sk33mask')}>skeemask</span>,
+        <span className="underline hover:no-underline cursor-pointer" onClick={() => setUsername('BAKEGLA')}>bake</span>
+        or 
+        <span className="underline hover:no-underline cursor-pointer" onClick={() => setUsername('delightsdiggers')}>delightsdiggers</span>
     </div>
   </div>
 }
@@ -105,7 +109,7 @@ export default function Home() {
           loading ? <div className="relative"><BoxLoading color="#ABC" /></div>
           : username.length ? 
             <Results username={username} tweets={tweets} /> 
-            : <NoQuery setUsername={setUsername} /> 
+            : <WelcomeCTA setUsername={setUsername} /> 
         }
       </main>
 

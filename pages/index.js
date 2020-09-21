@@ -1,19 +1,9 @@
 import Axios from 'axios'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
-import ReactPlayer from 'react-player'
 import styles from '../styles/Home.module.css'
 import useDebounce from '../src/useDebounce.js'
-
-const Media = ({ tweet }) => {
-  const url = tweet.entities.urls[0].expanded_url
-  if (!ReactPlayer.canPlay(url)){
-    return null
-  }
-  return <div>
-    <ReactPlayer url={url} />
-  </div>
-}
+import Media from '../src/components/Media'
 
 const MediaList = ({ tweets }) => {
   return <div>

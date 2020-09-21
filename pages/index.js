@@ -59,8 +59,8 @@ const WelcomeCTA = ({ setUsername }) => {
     <br />
     <div className="text-gray-700 mt-2">
       Have a look: 
-        <span className="underline hover:no-underline cursor-pointer" onClick={() => setUsername('sk33mask')}>skeemask</span>,
-        <span className="underline hover:no-underline cursor-pointer" onClick={() => setUsername('BAKEGLA')}>bake</span>
+        &nbsp;<span className="underline hover:no-underline cursor-pointer" onClick={() => setUsername('sk33mask')}>skeemask</span>,
+        &nbsp;<span className="underline hover:no-underline cursor-pointer" onClick={() => setUsername('BAKEGLA')}>bake</span>
         &nbsp;or&nbsp;
         <span className="underline hover:no-underline cursor-pointer" onClick={() => setUsername('delightsdiggers')}>delightsdiggers</span>
     </div>

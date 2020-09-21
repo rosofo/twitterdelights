@@ -21,7 +21,7 @@ const BEARER_TOKEN = process.env.TWITTER_BEARER_TOKEN
 export default async (req, res) => {
   const username = req.query.username
   try{
-    const bearerToken = await getBearerToken()
+    // const bearerToken = await getBearerToken()
     // currently only fetch youtube links
     const params = {
       'query': `from:${username} url:youtube`,

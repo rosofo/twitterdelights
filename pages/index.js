@@ -27,7 +27,7 @@ const SearchInput = ({ username, setUsername }) => {
     </a>
       : <span className="opacity-50"><TwitterIcon /></span>
   }
-    <input autofocus="true" className="focus:outline-none focus:border-gray-700 border-b border-gray-400  py-1 ml-4 pr-2" placeholder="Type a twitter handle" type={'text'} value={username} onChange={({ target: { value } }) => setUsername(value)}/>
+    <input autoFocus="true" className="focus:outline-none focus:border-gray-700 border-b border-gray-400  py-1 ml-4 pr-2" placeholder="Type a twitter handle" type={'text'} value={username} onChange={({ target: { value } }) => setUsername(value)}/>
   </div>
 }
 

@@ -10,7 +10,7 @@ import TwitterIcon from '../src/components/TwitterIcon'
 
 const MediaList = ({ tweets }) => {
   return <div>
-    {tweets.reverse().map(t => <div key={t.id} className="mb-2">
+    {tweets.map(t => <div key={t.id} className="mb-2">
       <Media tweet={t} key={t.id} />
     </div>)}
   </div>

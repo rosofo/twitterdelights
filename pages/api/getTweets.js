@@ -3,25 +3,25 @@ import Axios from 'axios';
 
 const endpointUrl = 'https://api.twitter.com/2/tweets/search/recent'
 
-// const getBearerToken = async () => {
-//   const oauthUrl = 'https://api.twitter.com/oauth2/token?grant_type=client_credentials'
-//   const { data: { access_token } } = await Axios.post(oauthUrl, {
-//     grant_type: 'client_credentials'
-//   }, {
-//     auth: {
-//       username: process.env.TWITTER_API_KEY,
-//       password: process.env.TWITTER_API_SECRET_KEY,
-//     }
-//   })
-//   return access_token
-// }
+const getBearerToken = async () => {
+  const oauthUrl = 'https://api.twitter.com/oauth2/token?grant_type=client_credentials'
+  const { data: { access_token } } = await Axios.post(oauthUrl, {
+    grant_type: 'client_credentials'
+  }, {
+    auth: {
+      username: process.env.TWITTER_API_KEY,
+      password: process.env.TWITTER_API_SECRET_KEY,
+    }
+  })
+  return access_token
+}
 
 const BEARER_TOKEN = process.env.TWITTER_BEARER_TOKEN
 
 export default async (req, res) => {
   const username = req.query.username
   try{
-    // const bearerToken = await getBearerToken()
+    const bearerToken = BEARER_TOKEN || await getBearerToken()
     // currently only fetch youtube links
     const params = {
       'query': `from:${username} url:youtube`,
@@ -31,7 +31,7 @@ export default async (req, res) => {
     const { data } = await Axios.get(endpointUrl, { 
       params,
       headers: {
-        "authorization": `Bearer ${BEARER_TOKEN}`
+        "authorization": `Bearer ${bearerToken}`
       }
     })
     res.json(data)

@@ -6,7 +6,9 @@ const Results = () => {
   const { username, tweets: { meta, data } } = useStore()
   if (!meta.result_count) {
     return <div>
-      Oops, looks like none of the users you chose posted in the past week!
+      Oops, looks like none of the users you chose 
+      <br />
+      posted youtube links in the past week!
     </div>
   }
   return <div>

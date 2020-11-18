@@ -24,7 +24,7 @@ export default async (req, res) => {
     const bearerToken = BEARER_TOKEN || await getBearerToken()
     // currently only fetch youtube links
     const params = {
-      'query': `(${usernames.split(',').map(u => `from:${u}`).join(' OR ')}) url:youtube`,
+      'query': `(${usernames.split(',').map(u => `from:${u}`).join(' OR ')}) (url:youtube OR url:soundcloud OR url:mixcloud)`,
       max_results: 100,
       'tweet.fields': 'entities',
       'expansions': 'author_id',

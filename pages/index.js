@@ -5,16 +5,10 @@ import styles from '../styles/Home.module.css'
 import useDebounce from '../src/hooks/useDebounce.js'
 import Media from '../src/components/Media'
 import { BoxLoading } from 'react-loadingg'
-import { MediaProvider } from '../src/hooks/useMediaContext'
 import TwitterIcon from '../src/components/TwitterIcon'
+import Results from '../src/components/Results';
 
-const MediaList = ({ tweets }) => {
-  return <div>
-    {tweets.map(t => <div key={t.id} className="mb-2">
-      <Media tweet={t} key={t.id} />
-    </div>)}
-  </div>
-}
+
 
 const SearchInput = ({ username, setUsername }) => {
   return <div className="flex items-center" >
@@ -28,24 +22,6 @@ const SearchInput = ({ username, setUsername }) => {
       : <span className="opacity-50"><TwitterIcon /></span>
   }
     <input autoFocus="true" className="focus:outline-none focus:border-gray-700 border-b border-gray-400  py-1 ml-4 pr-2" placeholder="Search by twitter username" type={'text'} value={username} onChange={({ target: { value } }) => setUsername(value)}/>
-  </div>
-}
-
-const Results = ({ username, tweets: { meta, data } }) => {
-  if(!meta.result_count){
-    return <div>
-      No Results...
-    </div>
-  }
-  return <div>
-    <a 
-      href={`https://twitter.com/${username}`}
-      className=" mb-4 block text-sm text-gray-700"
-      target="_blank"
-    >See the complete feed on twitter</a>
-    <MediaProvider>
-      <MediaList tweets={data} />
-    </MediaProvider>
   </div>
 }
 

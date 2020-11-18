@@ -33,7 +33,7 @@ const Media = ({ tweet, index }) => {
 
   if(!displayIframe && thumbURL){
     return <div>
-      <div style={{ width: "640px" }}onClick={() => {
+      <div style={{ width: "640px", maxWidth: '100vw' }}onClick={() => {
           setDisplayIframe(true)
           setNowPlaying(index)
         }}
@@ -45,7 +45,8 @@ const Media = ({ tweet, index }) => {
     </div>
   }
   return <div>
-    <ReactPlayer 
+    <ReactPlayer
+      style={{maxWidth: '100vw'}}
       url={url}
       onPlay={() => setNowPlaying(index)}
       onPause={() => {}}

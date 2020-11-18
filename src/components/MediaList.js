@@ -3,7 +3,6 @@ import Media from './Media';
 
 const MediaList = ({ tweets }) => {
   const { tweets: { includes: { users } } } = useStore()
-  
   return <div>
     {tweets.map((t, i) => {
       const user = users.find(u => u.id === t.author_id)

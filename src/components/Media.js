@@ -23,10 +23,9 @@ const Media = ({ tweet, index }) => {
 
   const { entities } = tweet
   if(!entities || !entities.urls){
-    return url
+    return null
   }
   const url = entities.urls[0].expanded_url;
-  console.log(nowPlaying, index)
   if (!ReactPlayer.canPlay(url)) {
     return null;
   }
@@ -34,7 +33,6 @@ const Media = ({ tweet, index }) => {
 
   if(!displayIframe && thumbURL){
     return <div>
-      {nowPlaying}
       <div style={{ width: "640px" }}onClick={() => {
           setDisplayIframe(true)
           setNowPlaying(index)
@@ -47,7 +45,6 @@ const Media = ({ tweet, index }) => {
     </div>
   }
   return <div>
-    {nowPlaying}
     <ReactPlayer 
       url={url}
       onPlay={() => setNowPlaying(index)}

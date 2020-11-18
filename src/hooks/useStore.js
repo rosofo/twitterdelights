@@ -15,7 +15,12 @@ export const {
 } = fabricateContext((props) => {
   const [loading, setLoading] = useState(false)
   const [usernames, setUsernames] = useLocalStorage('usernames', [])
-  const addUsername = (username) => setUsernames([...new Set([...usernames, username])])
+  const addUsername = (username) => {
+    setUsernames([...new Set([...usernames, username])])
+    window.gtag('event', 'search', {
+      search_term: username
+    });
+  }
   const removeUsername = (username) => setUsernames(usernames.filter(u => u !== username))
   
   const [tweets, setTweets] = useState(initialTweetsState)

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import ReactPlayer from 'react-player';
 import { useMediaContext } from '../hooks/useMediaContext';
+import { useStore } from '../hooks/useStore';
 
 const Media = ({ tweet }) => {
   const [displayIframe, setDisplayIframe] = useState()
@@ -10,6 +11,11 @@ const Media = ({ tweet }) => {
     setPlaying(nowPlaying === url)
   }, [nowPlaying, url, setPlaying])
 
+  useEffect(() => {
+    if (displayIframe){
+      setPlaying(true)
+    }
+  }, [displayIframe])
   const { entities } = tweet
   if(!entities || !entities.urls){
     return url
@@ -20,10 +26,13 @@ const Media = ({ tweet }) => {
     return null;
   }
   const thumbURL = getThumb(url)
+
   if(!displayIframe && thumbURL){
-    return <div onClick={() => setDisplayIframe(true)} className="relative cursor-pointer">
-      <YoutubePlayIcon />
-      <img className="w-full" src={thumbURL} />
+    return <div>
+      <div style={{ width: "640px" }}onClick={() => setDisplayIframe(true)} className="relative cursor-pointer">
+        <YoutubePlayIcon />
+        <img className="w-full" src={thumbURL} />
+      </div>
     </div>
   }
   return <div>

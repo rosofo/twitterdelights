@@ -26,7 +26,8 @@ export default async (req, res) => {
     const params = {
       'query': `(${usernames.split(',').map(u => `from:${u}`).join(' OR ')}) url:youtube`,
       max_results: 100,
-      'tweet.fields': 'entities'
+      'tweet.fields': 'entities',
+      'expansions': 'author_id',
     }
     const { data } = await Axios.get(endpointUrl, { 
       params,

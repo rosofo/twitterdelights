@@ -37,7 +37,6 @@ const WelcomeCTA = ({ setUsername }) => {
 }
 
 export default function Home() {
-  const [loading, setLoading] = useState(false)
   
   const [username, setUsername] = useState('')
 
@@ -49,16 +48,16 @@ export default function Home() {
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.10/tailwind.min.css" />
       </Head>
       <StoreProvider>
-        <main className={styles.main}>
-          <div className={`mb-16 mt-8 ${styles.appear} sticky top-0 w-full z-10 flex justify-center bg-white pb-2`}>
+        <main className={`${styles.main} pt-32 pb-8`}>
+          <div className={`mb-16 mt-8 ${styles.appear} absolute top-0 w-full z-10 flex justify-center bg-white pb-2`}>
             <SearchInput username={username} setUsername={setUsername} />
           </div>
           <StoreConsumer>
-            {({ usernames }) => (
+            {({ usernames, addUsername, loading }) => (
                 loading ? <div className="relative"><BoxLoading color="#ABC" /></div>
                 : usernames.length ? 
                   <Results /> 
-                  : <WelcomeCTA setUsername={setUsername} /> 
+                  : <WelcomeCTA setUsername={addUsername} /> 
             )}
           </StoreConsumer>
         </main>

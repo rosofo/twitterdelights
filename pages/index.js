@@ -3,27 +3,11 @@ import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import styles from '../styles/Home.module.css'
 import useDebounce from '../src/hooks/useDebounce.js'
-import Media from '../src/components/Media'
 import { BoxLoading } from 'react-loadingg'
 import TwitterIcon from '../src/components/TwitterIcon'
 import Results from '../src/components/Results';
+import SearchInput from '../src/components/SearchInput';
 
-
-
-const SearchInput = ({ username, setUsername }) => {
-  return <div className="flex items-center" >
-    { username.length ? <a 
-      href={`https://twitter.com/${username}`} 
-      target="_blank"
-      className="opacity-75 hover:opacity-100"
-    >
-      <TwitterIcon />
-    </a>
-      : <span className="opacity-50"><TwitterIcon /></span>
-  }
-    <input autoFocus="true" className="focus:outline-none focus:border-gray-700 border-b border-gray-400  py-1 ml-4 pr-2" placeholder="Search by twitter username" type={'text'} value={username} onChange={({ target: { value } }) => setUsername(value)}/>
-  </div>
-}
 
 const exampleAccounts = [
   // 'keinobjekt',

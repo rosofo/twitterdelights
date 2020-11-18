@@ -1,7 +1,9 @@
 const { MediaProvider } = require("../hooks/useMediaContext")
+import { useStore } from '../hooks/useStore';
 import MediaList from './MediaList';
 
-const Results = ({ username, tweets: { meta, data } }) => {
+const Results = () => {
+  const { username, tweets: { meta, data } } = useStore()
   if (!meta.result_count) {
     return <div>
       No Results...

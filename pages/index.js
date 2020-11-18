@@ -4,10 +4,9 @@ import { useEffect, useState } from 'react'
 import styles from '../styles/Home.module.css'
 import useDebounce from '../src/hooks/useDebounce.js'
 import { BoxLoading } from 'react-loadingg'
-import TwitterIcon from '../src/components/TwitterIcon'
 import Results from '../src/components/Results';
 import SearchInput from '../src/components/SearchInput';
-
+import { StoreProvider, StoreConsumer } from '../src/hooks/useStore'
 
 const exampleAccounts = [
   // 'keinobjekt',
@@ -36,32 +35,11 @@ const WelcomeCTA = ({ setUsername }) => {
     </div>
   </div>
 }
-const initialTweetsState = {
-  data: [],
-  meta: { }
-}
 
 export default function Home() {
   const [loading, setLoading] = useState(false)
-  const [tweets, setTweets] = useState(initialTweetsState)
+  
   const [username, setUsername] = useState('')
-  const debouncedUsername = useDebounce(username, 500)
-
-  useEffect(() => {
-    if(username.length === 0){
-      setTweets(initialTweetsState)
-      return
-    }
-    (async () => {
-      setLoading(true)
-      try{
-        const { data } = await Axios.get(`/api/getTweets?username=${debouncedUsername}`)
-        setTweets(data)
-      } catch(err){
-      }
-      setLoading(false)
-    })()
-  }, [debouncedUsername])
 
   return (
     <div className={styles.container}>
@@ -70,18 +48,21 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.10/tailwind.min.css" />
       </Head>
-
-      <main className={styles.main}>
-        <div className={`mb-16 mt-8 ${styles.appear} sticky top-0 w-full z-10 flex justify-center bg-white pb-2`}>
-          <SearchInput username={username} setUsername={setUsername} />
-        </div>
-        {
-          loading ? <div className="relative"><BoxLoading color="#ABC" /></div>
-          : username.length ? 
-            <Results username={username} tweets={tweets} /> 
-            : <WelcomeCTA setUsername={setUsername} /> 
-        }
-      </main>
+      <StoreProvider>
+        <main className={styles.main}>
+          <div className={`mb-16 mt-8 ${styles.appear} sticky top-0 w-full z-10 flex justify-center bg-white pb-2`}>
+            <SearchInput username={username} setUsername={setUsername} />
+          </div>
+          <StoreConsumer>
+            {({ usernames }) => (
+                loading ? <div className="relative"><BoxLoading color="#ABC" /></div>
+                : usernames.length ? 
+                  <Results /> 
+                  : <WelcomeCTA setUsername={setUsername} /> 
+            )}
+          </StoreConsumer>
+        </main>
+      </StoreProvider>
 
       <footer className={styles.footer}>
           <div className="text-gray-600 text-xs">

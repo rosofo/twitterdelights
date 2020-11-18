@@ -3,25 +3,30 @@ import ReactPlayer from 'react-player';
 import { useMediaContext } from '../hooks/useMediaContext';
 import { useStore } from '../hooks/useStore';
 
-const Media = ({ tweet }) => {
+const Media = ({ tweet, index }) => {
   const [displayIframe, setDisplayIframe] = useState()
   const [playing, setPlaying] = useState()
   const { nowPlaying, setNowPlaying } = useMediaContext()
   useEffect(() => {
-    setPlaying(nowPlaying === url)
-  }, [nowPlaying, url, setPlaying])
+    const isPlaying = nowPlaying === index
+    setPlaying(isPlaying)
+    setDisplayIframe(isPlaying)
+    if(displayIframe){
+    }
+  }, [nowPlaying, index, setPlaying])
 
   useEffect(() => {
-    if (displayIframe){
-      setPlaying(true)
+    if (nowPlaying === index && (displayIframe || playing)){
+      setNowPlaying(index)
     }
-  }, [displayIframe])
+  }, [displayIframe, playing, nowPlaying])
+
   const { entities } = tweet
   if(!entities || !entities.urls){
     return url
   }
   const url = entities.urls[0].expanded_url;
-
+  console.log(nowPlaying, index)
   if (!ReactPlayer.canPlay(url)) {
     return null;
   }
@@ -29,17 +34,28 @@ const Media = ({ tweet }) => {
 
   if(!displayIframe && thumbURL){
     return <div>
-      <div style={{ width: "640px" }}onClick={() => setDisplayIframe(true)} className="relative cursor-pointer">
+      {nowPlaying}
+      <div style={{ width: "640px" }}onClick={() => {
+          setDisplayIframe(true)
+          setNowPlaying(index)
+        }}
+        className="relative cursor-pointer"
+      >
         <YoutubePlayIcon />
         <img className="w-full" src={thumbURL} />
       </div>
     </div>
   }
   return <div>
+    {nowPlaying}
     <ReactPlayer 
       url={url}
-      onPlay={() => setNowPlaying(url)}
-      onPause={() => setNowPlaying(url)}
+      onPlay={() => setNowPlaying(index)}
+      onPause={() => {}}
+      onEnded={() => {
+        setNowPlaying(index + 1)
+        setPlaying(false)
+      }}
       controls
       playing={playing}
     />

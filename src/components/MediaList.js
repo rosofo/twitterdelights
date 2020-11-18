@@ -5,10 +5,10 @@ const MediaList = ({ tweets }) => {
   const { tweets: { includes: { users } } } = useStore()
   
   return <div>
-    {tweets.map(t => {
+    {tweets.map((t, i) => {
       const user = users.find(u => u.id === t.author_id)
       return <div key={t.id} className="mb-2 ">
-        <Media tweet={t} key={t.id} />
+        <Media tweet={t} key={t.id} index={i} />
         <div class="mb-4 text-gray">
           <a 
             className="text-gray-600 italic hover:underline ml"

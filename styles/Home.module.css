@@ -18,7 +18,8 @@
 .intro{
   position: absolute;
   width: 100vw;
-  top: calc(40% - 60px)
+  top: calc(40% - 60px);
+  background-color: white;
 }
 .footer {
   width: 100%;

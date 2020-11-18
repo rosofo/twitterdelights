@@ -32,8 +32,8 @@ const SearchInput = ({ username }) => {
       <span className="opacity-50"><TwitterIcon /></span>
       <input 
         autoFocus="true"
-        className="focus:outline-none focus:border-gray-700 border-b border-gray-400  py-1 ml-4 pr-2"
-        placeholder="Add twitter users"
+        className="focus:outline-none focus:border-gray-700 border-b border-gray-400  py-1 ml-4 pr-2 w-64"
+        placeholder="Add twitter users to your feed"
         type={'text'}
         onKeyDown={({ keyCode, target }) => keyCode === 13 && handleEnter(target)}
       />
